@@ -16,6 +16,16 @@ exports.handler = async function (event, context) {
             }
         case 'POST':
             return require('./create').handler(event, context)
+        case 'DELETE':
+            if (segments.length === 3) {
+                event.id = segments[2]
+                return require('./delete').handler(event, context)
+            }
+        case 'PATCH':
+            if (segments.length === 3) {
+                event.id = segments[2]
+                return require('./update').handler(event, context)
+            }
         default:
             return {
                 statusCode: 404,
